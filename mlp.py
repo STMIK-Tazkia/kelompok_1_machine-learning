@@ -38,26 +38,26 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 mlp = MLPClassifier(
     hidden_layer_sizes=(128, 64),
-    max_iter=2000,
+    max_iter=500,
     activation='relu',
     solver='adam',
     alpha=0.0001, 
     random_state=42,
     tol=1e-4,
-    verbose=False 
+    verbose=True 
 )
 
 print("Memulai Pelatihan Model MLP...")
 mlp.fit(X_train, y_train)
-print("Pelatihan Selesai.\n")
+print("Pelatihan Selesai. :)\n")
 
 y_pred = mlp.predict(X_test)
 
 accuracy = accuracy_score(y_test, y_pred) * 100
 
-print("-" * 40)
-print(f"🎯 Akurasi Model MLP: {accuracy:.2f}%")
-print("-" * 40 + "\n")
+print("~" * 40)
+print(f" >\\\< Akurasi Model MLP: {accuracy:.2f}% >\\\< ")
+print("~" * 40 + "\n")
 
 print(" Laporan Klasifikasi ")
 print(classification_report(y_test, y_pred, target_names=le.classes_))
