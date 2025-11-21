@@ -56,7 +56,7 @@ y_pred = mlp.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred) * 100
 
 print("-" * 40)
-print(f"🎯 Akurasi Model MLP: {accuracy:.2f}%")
+print(f" Akurasi Model MLP: {accuracy:.2f}%")
 print("-" * 40 + "\n")
 
 print(" Laporan Klasifikasi ")
