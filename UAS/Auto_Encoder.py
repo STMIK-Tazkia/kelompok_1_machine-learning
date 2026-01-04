@@ -52,5 +52,5 @@ plt.show()
 
 print("Autoencoder selesai dilatih!")
 
-#
+
 
