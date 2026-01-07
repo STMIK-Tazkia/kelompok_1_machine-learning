@@ -1,6 +1,7 @@
 ~~~Tugas UTS~~~
 Kelompok 1
-Judul: Klasifikasi Jenis Kismis (Kecimen dan Besni) Menggunakan Model Multi-Layer Perceptron (MLP)
+Judul UTS: Klasifikasi Jenis Kismis (Kecimen dan Besni) Menggunakan Model Multi-Layer Perceptron (MLP)
+Judul UAS: Klasifikasi Jenis Kismis (Kecimen dan Besni) Menggunakan Deep Neural Network (DNN)
 
 Nama Mahasiswa:Abdullah Mubarok Maspeke 
 Email: 241552010001.maspeke@student.stmik.tazkia.ac.id
