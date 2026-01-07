@@ -35,7 +35,7 @@ model = models.Sequential([
     layers.Dropout(0.2),
     
     # Hidden Layer 3
-    layers.Dense(32, activation='relu'),
+    #layers.Dense(32, activation='relu'),
     
     # Output Layer (Sigmoid untuk biner: Besni & Kecimen)
     layers.Dense(1, activation='sigmoid')
@@ -70,6 +70,10 @@ y_pred_prob = model.predict(X_test)
 y_pred = (y_pred_prob > 0.5).astype(int).flatten()
 
 accuracy = accuracy_score(y_test, y_pred) * 100
-print(f"\nTotal Akurasi DNN: {accuracy:.2f}%")
+
+print("~" * 40)
+print(f" >\\\< Akurasi Model DNN: {accuracy:.2f}% >\\\< ")
+print("~" * 40 + "\n")
+
 print("\nLaporan Klasifikasi:")
 print(classification_report(y_test, y_pred, target_names=le.classes_))
