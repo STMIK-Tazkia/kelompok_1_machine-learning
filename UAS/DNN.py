@@ -8,7 +8,8 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 import tensorflow as tf
 from tensorflow.keras import layers, models, callbacks
 
-# 1. Load & Preprocess (Sama seperti sebelumnya)
+# 1. Load & Preprocess
+# Pastikan file 'Raisin.csv' berada di folder yang sama dengan script ini
 df = pd.read_csv('Raisin.csv')
 X = df.drop('Class', axis=1)
 y = df['Class']
@@ -34,9 +35,6 @@ model = models.Sequential([
     layers.BatchNormalization(),
     layers.Dropout(0.2),
     
-    # Hidden Layer 3
-    #layers.Dense(32, activation='relu'),
-    
     # Output Layer (Sigmoid untuk biner: Besni & Kecimen)
     layers.Dense(1, activation='sigmoid')
 ])
@@ -48,7 +46,7 @@ model.compile(
     metrics=['accuracy']
 )
 
-# 4. Training dengan Early Stopping (Berhenti otomatis jika tidak ada perkembangan)
+# 4. Training dengan Early Stopping
 early_stopping = callbacks.EarlyStopping(
     monitor='val_loss', 
     patience=10, 
@@ -60,7 +58,7 @@ history = model.fit(
     X_train, y_train,
     epochs=100,
     batch_size=32,
-    validation_split=0.2, # Menggunakan sebagian data train untuk validasi
+    validation_split=0.2, 
     callbacks=[early_stopping],
     verbose=1
 )
@@ -71,9 +69,47 @@ y_pred = (y_pred_prob > 0.5).astype(int).flatten()
 
 accuracy = accuracy_score(y_test, y_pred) * 100
 
-print("~" * 40)
+print("\n" + "~" * 40)
 print(f" >\\\< Akurasi Model DNN: {accuracy:.2f}% >\\\< ")
 print("~" * 40 + "\n")
 
 print("\nLaporan Klasifikasi:")
 print(classification_report(y_test, y_pred, target_names=le.classes_))
+
+# --- 6. VISUALISASI HASIL ---
+
+# A. Plot Akurasi dan Loss
+plt.figure(figsize=(14, 5))
+
+# Subplot Akurasi
+plt.subplot(1, 2, 1)
+plt.plot(history.history['accuracy'], label='Training Accuracy', color='blue')
+plt.plot(history.history['val_accuracy'], label='Validation Accuracy', color='orange')
+plt.title('Grafik Akurasi Model')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.legend()
+plt.grid(True, linestyle='--', alpha=0.6)
+
+# Subplot Loss
+plt.subplot(1, 2, 2)
+plt.plot(history.history['loss'], label='Training Loss', color='blue')
+plt.plot(history.history['val_loss'], label='Validation Loss', color='orange')
+plt.title('Grafik Loss Model')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.legend()
+plt.grid(True, linestyle='--', alpha=0.6)
+
+plt.tight_layout()
+plt.show()
+
+# B. Plot Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+plt.figure(figsize=(7, 6))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
+            xticklabels=le.classes_, yticklabels=le.classes_)
+plt.title('Confusion Matrix: Prediksi vs Aktual')
+plt.xlabel('Prediksi (Predicted)')
+plt.ylabel('Kenyataan (Actual)')
+plt.show()
