@@ -26,12 +26,12 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 # 2. Membangun Arsitektur Deep Neural Network (DNN)
 model = models.Sequential([
-    layers.Dense(128, activation='relu', input_shape=(X_train.shape[1],)),
+    layers.Dense(89, activation='relu', input_shape=(X_train.shape[1],)),
     layers.BatchNormalization(),
     layers.Dropout(0.3),
     
     # Hidden Layer 2
-    layers.Dense(64, activation='relu'),
+    layers.Dense(55, activation='relu'),
     layers.BatchNormalization(),
     layers.Dropout(0.2),
     
@@ -56,7 +56,7 @@ early_stopping = callbacks.EarlyStopping(
 print("Memulai Pelatihan DNN...")
 history = model.fit(
     X_train, y_train,
-    epochs=100,
+    epochs=36,
     batch_size=32,
     validation_split=0.2, 
     callbacks=[early_stopping],
@@ -78,33 +78,9 @@ print(classification_report(y_test, y_pred, target_names=le.classes_))
 
 # --- 6. VISUALISASI HASIL ---
 
-# A. Plot Akurasi dan Loss
-plt.figure(figsize=(14, 5))
 
-# Subplot Akurasi
-plt.subplot(1, 2, 1)
-plt.plot(history.history['accuracy'], label='Training Accuracy', color='blue')
-plt.plot(history.history['val_accuracy'], label='Validation Accuracy', color='orange')
-plt.title('Grafik Akurasi Model')
-plt.xlabel('Epoch')
-plt.ylabel('Accuracy')
-plt.legend()
-plt.grid(True, linestyle='--', alpha=0.6)
 
-# Subplot Loss
-plt.subplot(1, 2, 2)
-plt.plot(history.history['loss'], label='Training Loss', color='blue')
-plt.plot(history.history['val_loss'], label='Validation Loss', color='orange')
-plt.title('Grafik Loss Model')
-plt.xlabel('Epoch')
-plt.ylabel('Loss')
-plt.legend()
-plt.grid(True, linestyle='--', alpha=0.6)
-
-plt.tight_layout()
-plt.show()
-
-# B. Plot Confusion Matrix
+# Plot Confusion Matrix
 cm = confusion_matrix(y_test, y_pred)
 plt.figure(figsize=(7, 6))
 sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
