@@ -77,9 +77,6 @@ print("\nLaporan Klasifikasi:")
 print(classification_report(y_test, y_pred, target_names=le.classes_))
 
 # --- 6. VISUALISASI HASIL ---
-
-
-
 # Plot Confusion Matrix
 cm = confusion_matrix(y_test, y_pred)
 plt.figure(figsize=(7, 6))
