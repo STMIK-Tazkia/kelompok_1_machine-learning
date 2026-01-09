@@ -1,6 +1,8 @@
 
 Kelompok 1
+
 Judul UTS: Klasifikasi Jenis Kismis (Kecimen dan Besni) Menggunakan Model Multi-Layer Perceptron (MLP)
+
 Judul UAS: Klasifikasi Jenis Kismis (Kecimen dan Besni) Menggunakan Deep Neural Network (DNN) dan Tensorflow
 
 Nama Mahasiswa:Abdullah Mubarok Maspeke 
